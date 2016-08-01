@@ -1,66 +1,55 @@
 <html>
-	<head>
-		<link rel="stylesheet" href="./style.css" type="text/css">
-
-		<script type="text/javascript" src="./js/jquery-1.6.2.min.js"></script>
-		<script type="text/javascript" src="./js/bigtext.js"></script>
-		<script type="text/javascript" src="./js/jquery.animate-enhanced.min.js"></script>
-		<script type="text/javascript" src="./js/jquery.wheel.js"></script>
-		<script type="text/javascript" src="./js/ui.js"></script>
-		<script type="text/javascript" src="./js/moment.min.js"></script>
-		<script type="text/javascript" src="./js/time.js"></script>
-		<!-- Test Mode, now automatic! -->
-		<script type="text/javascript" src="./lightdm.js"></script>
-		
-	</head>
-	<body>
-		<div id="background">
-			<!--img src="./img/bg.jpg" class="stretch" alt=""-->
-		</div>
-		<div id="pseudo-body"></div>
-		<div id="bg-top"></div>
-		<div id="panel">
-			<div id="logo" alt=""></div>
-			<div id="session-container" class="menu">
-				<img src="./img/session.png"/>
-				<ul id="session-menu" class="down-arrow">
-				</ul>
-			</div>
-			<div id="shutdown-container" class="menu">
-				<img src="./img/shutdown.png"/>
-				<ul id="shutdown-menu" class="down-arrow">
-				</ul>
-			</div>
-		</div>
-		<div id="center">
-			<div id="users">
-			</div>
-			<div id="password-box">
-				<!--div class="input-r">
-					<div class="input-l"-->
-						<div class="input-c">
-							<input id="password-input" type="password" size="" maxlength="" placeholder="Password"/>
-						</div>
-					<!--/div>
-				</div-->
-			</div>
-		</div>
-		<div id="temp"></div>
-		<div id="clock"><span id="clock-time">10:20</span><span id="clock-date">16 Juli 2013</span></div>
-	</body>
-	
-	<script language=JavaScript>
-	    var message="";
-	    ///////////////////////////////////
-	    function clickIE() {if (document.all) {(message);return false;}}
-	    function clickNS(e) {if
-	    (document.layers||(document.getElementById&&!document.all)) {
-	    if (e.which==2||e.which==3) {(message);return false;}}}
-	    if (document.layers)
-	    {document.captureEvents(Event.MOUSEDOWN)
-	    ;document.onmousedown=clickNS;}
-	    else{document.onmouseup=clickNS;document.oncontextmenu=clickIE;}
-	    document.oncontextmenu=new Function("return false")
-	    // -->
-	</script>
+  <head>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <!-- mock.js is only required for local testing -->
+    <script type="text/javascript" src="mock.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+  </head>
+  <body onload="initialize()" oncontextmenu="return false;">
+    <div class="header">
+      <div class="blankonlogo"></div>
+      <span id="current_time" class="time"></span>
+    </div>
+    <div class="login_content">
+      <div class="login_container">
+        <div class="center">
+          <div id="user_template" class="user hidden smooth button">
+            <div class="user_image_wrapper">
+              <img class="user_image" src=""/>
+            </div>
+            <span class="user_name"></span>
+          </div>
+        </div>
+        <div id="password_container" class="center hidden smooth">
+          <form action="javascript: provide_secret()" class="password_prompt">
+            <input id="password_entry" type="password" placeholder="Password" />
+            <div id="session_container" class="smooth">
+              <div id="session_template">
+                <label>
+                  <input type="radio" name="session">&nbsp;<span class="session_label"></span></input>
+                </label>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div id="message" class="smooth">
+      <div id="message_content"></div>
+    </div>
+    <div class="footer">
+      <div id="action_suspend" class="action button">
+        <div class="action_image_wrapper" onclick="lightdm.suspend();"><img class="action_image" src="img/sleep.svg"/></div>
+        <span class="action_label">Sleep</span>
+      </div>
+      <div id="action_restart" class="action button">
+        <div class="action_image_wrapper" onclick="lightdm.restart();"><img class="action_image" src="img/restart.svg"/></div>
+        <span class="action_label">Restart</span>
+      </div>
+      <div id="action_shutdown" class="action button">
+        <div class="action_image_wrapper" onclick="lightdm.shutdown();"><img class="action_image" src="img/shutdown.svg"/></div>
+        <span class="action_label">Shutdown</span>
+      </div>
+    </div>
+  </body>
 </html>
